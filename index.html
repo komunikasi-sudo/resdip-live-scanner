@@ -46,7 +46,8 @@ function validateConfiguration() {
   const url = urlInput.value.trim().replace(/\?.*$/, '').replace(/\/$/, '');
   const operator = operatorInput.value.trim();
   const key = keyInput.value.trim();
-  if (!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(url)) {
+  const validGoogleUrl = /^https:\/\/script\.google\.com\/(?:macros\/s|a\/macros\/[^/]+\/s)\/[^/]+\/exec$/.test(url);
+  if (!validGoogleUrl) {
     show(false, 'Enter the Apps Script deployment URL ending in /exec.'); return null;
   }
   if (!operator) { show(false, 'Enter the operator name.'); return null; }
